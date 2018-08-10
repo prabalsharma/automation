@@ -32,7 +32,7 @@ parameters:
   flavor:
     type: string
     description: Master Flavor
-    default: m1.large
+    default: m1.xlarge
     constraints:
       - custom_constraint: nova.flavor
   keypair:

@@ -124,7 +124,9 @@ build_stack() {
   openstack stack create --verbose --wait -e "$HEAT_ENVIRONMENT_FILE" -t caasp-stack.yaml "$NAME" \
     --parameter master_count=$MASTERS \
     --parameter worker_count=$WORKERS \
-    --parameter image="$IMAGE"
+    --parameter image="$IMAGE" \
+    --insecure \
+    --parameter external_net="floating"
 
   log "CaaSP Stack Created with name $NAME"
 
@@ -147,7 +149,9 @@ update_stack() {
   openstack stack update --wait -e "$HEAT_ENVIRONMENT_FILE" -t caasp-stack.yaml "$stack_name" \
     --parameter master_count=$MASTERS \
     --parameter worker_count=$WORKERS \
-    --parameter image="$IMAGE"
+    --parameter image="$IMAGE" \
+    --insecure \
+    --parameter external_net="floating"
 
   ./tools/generate-environment "$NAME"
   ../misc-tools/generate-ssh-config environment.json

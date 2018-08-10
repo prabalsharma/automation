@@ -55,7 +55,7 @@ parameters:
   master_flavor:
     type: string
     description: Master Flavor
-    default: m1.large
+    default: m1.xlarge
     constraints:
       - custom_constraint: nova.flavor
   master_count:
@@ -65,7 +65,7 @@ parameters:
   worker_flavor:
     type: string
     description: Worker Flavor
-    default: m1.large
+    default: m1.xlarge
     constraints:
       - custom_constraint: nova.flavor
   worker_count:
@@ -184,6 +184,21 @@ resources:
     type: OS::Neutron::SecurityGroup
     properties:
       rules:
+        - protocol: tcp
+          port_range_min: 2222
+          port_range_max: 2222
+        - protocol: tcp
+          port_range_min: 4443
+          port_range_max: 4443
+        - protocol: tcp
+          port_range_min: 2341
+          port_range_max: 2341
+        - protocol: tcp
+          port_range_min: 20000
+          port_range_max: 20008
+        - protocol: tcp
+          port_range_min: 2793
+          port_range_max: 2793
         - protocol: tcp
           port_range_min: 80
           port_range_max: 80
